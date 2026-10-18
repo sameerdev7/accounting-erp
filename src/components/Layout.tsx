@@ -8,6 +8,33 @@ import { backupReminderDays } from '@/services/backup'
 import { useSession } from '@/store/session'
 import { NAV } from './nav'
 import { Alert } from './ui'
+import { ThemeToggle } from './ThemeToggle'
+
+function LogoMark({ className = '' }: { className?: string }) {
+  return (
+    <span
+      className={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-brand-400 to-brand-600 shadow-glow ${className}`}
+    >
+      <svg viewBox="0 0 64 64" className="h-4 w-4" aria-hidden="true">
+        <g fill="#fff">
+          <rect x="14" y="34" width="8" height="16" rx="2" />
+          <rect x="28" y="26" width="8" height="24" rx="2" />
+          <rect x="42" y="16" width="8" height="34" rx="2" />
+        </g>
+      </svg>
+    </span>
+  )
+}
+
+function initials(name: string | undefined): string {
+  if (!name) return '?'
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? '')
+    .join('')
+}
 
 function SidebarLink({ to, label, onNavigate }: { to: string; label: string; onNavigate: () => void }) {
   return (
@@ -16,10 +43,10 @@ function SidebarLink({ to, label, onNavigate }: { to: string; label: string; onN
       end={to === '/'}
       onClick={onNavigate}
       className={({ isActive }) =>
-        `block rounded-md px-3 py-1.5 text-sm ${
+        `block rounded-lg px-3 py-1.5 text-sm transition-colors ${
           isActive
-            ? 'bg-brand-600 font-medium text-white'
-            : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+            ? 'bg-gradient-to-r from-brand-500 to-brand-600 font-medium text-white shadow-sm'
+            : 'text-slate-300 hover:bg-white/5 hover:text-white'
         }`
       }
     >
@@ -70,16 +97,19 @@ export function Layout() {
   }
 
   return (
-    <div className="flex min-h-screen bg-slate-100">
-      {/* Sidebar */}
+    <div className="flex min-h-screen bg-slate-100 dark:bg-slate-950">
+      {/* Sidebar — a deep ink rail in both themes */}
       <aside
         className={`${
           open ? 'block' : 'hidden'
-        } fixed inset-y-0 left-0 z-30 w-72 overflow-y-auto border-r border-slate-200 bg-white p-4 lg:static lg:block`}
+        } fixed inset-y-0 left-0 z-30 w-72 overflow-y-auto border-r border-white/5 bg-gradient-to-b from-slate-900 to-slate-950 p-4 lg:static lg:block dark:border-slate-800`}
       >
-        <div className="mb-4 border-b border-slate-100 pb-3">
-          <p className="text-sm font-bold text-brand-700">{company?.shortName ?? 'Sai ERP'}</p>
-          <p className="text-xs text-slate-500">{company?.name ?? 'Accounting & ERP'}</p>
+        <div className="mb-4 flex items-center gap-3 border-b border-white/10 pb-3">
+          <LogoMark />
+          <div className="min-w-0">
+            <p className="truncate text-sm font-bold text-white">{company?.shortName ?? 'Sai ERP'}</p>
+            <p className="truncate text-xs text-slate-400">{company?.name ?? 'Accounting & ERP'}</p>
+          </div>
         </div>
 
         <nav className="space-y-4 pb-16">
@@ -88,7 +118,7 @@ export function Layout() {
             if (items.length === 0) return null
             return (
               <div key={group.label}>
-                <p className="mb-1 px-3 text-xs font-semibold uppercase tracking-wide text-slate-400">
+                <p className="mb-1 px-3 text-xs font-semibold uppercase tracking-wider text-slate-500">
                   {group.label}
                 </p>
                 <div className="space-y-0.5">
@@ -102,26 +132,46 @@ export function Layout() {
         </nav>
       </aside>
 
-      {open && <div className="fixed inset-0 z-20 bg-slate-900/30 lg:hidden" onClick={close} />}
+      {open && (
+        <div
+          className="fixed inset-0 z-20 bg-slate-950/60 backdrop-blur-sm lg:hidden"
+          onClick={close}
+        />
+      )}
 
       {/* Main column */}
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="no-print sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 py-2.5">
-          <button
-            type="button"
-            className="btn-ghost lg:hidden"
-            onClick={() => setOpen((value) => !value)}
-            aria-label="Toggle navigation"
-          >
-            ☰
-          </button>
-          <div className="hidden text-sm text-slate-500 lg:block">
-            {company?.name} · GSTIN {company?.gstin}
+        <header className="no-print sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-slate-200 bg-white/80 px-4 py-2.5 backdrop-blur dark:border-slate-800 dark:bg-slate-900/80">
+          <div className="flex min-w-0 items-center gap-3">
+            <button
+              type="button"
+              className="btn-ghost -ml-1 px-2 lg:hidden"
+              onClick={() => setOpen((value) => !value)}
+              aria-label="Toggle navigation"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="h-5 w-5">
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <div className="hidden min-w-0 text-sm text-slate-500 lg:block dark:text-slate-400">
+              <span className="font-medium text-slate-700 dark:text-slate-300">{company?.name}</span>
+              <span className="mx-2 text-slate-300 dark:text-slate-600">·</span>
+              <span className="font-mono text-xs">GSTIN {company?.gstin}</span>
+            </div>
           </div>
+
           <div className="flex items-center gap-3">
-            <div className="text-right">
-              <p className="text-sm font-medium text-slate-800">{user?.name}</p>
-              <p className="text-xs text-slate-500">{user ? ROLE_LABELS[user.role] : ''}</p>
+            <ThemeToggle />
+            <div className="hidden items-center gap-2 sm:flex">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-100 text-xs font-semibold text-brand-700 dark:bg-brand-500/20 dark:text-brand-200">
+                {initials(user?.name)}
+              </span>
+              <div className="text-right leading-tight">
+                <p className="text-sm font-medium text-slate-800 dark:text-slate-100">{user?.name}</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  {user ? ROLE_LABELS[user.role] : ''}
+                </p>
+              </div>
             </div>
             <button type="button" className="btn-secondary" onClick={handleSignOut}>
               Sign out
@@ -141,11 +191,11 @@ export function Layout() {
           </div>
         )}
 
-        <main className="min-w-0 flex-1 p-4">
+        <main className="min-w-0 flex-1 p-4 lg:p-6">
           <Outlet />
         </main>
 
-        <footer className="no-print border-t border-slate-200 px-4 py-2 text-center text-xs text-slate-400">
+        <footer className="no-print border-t border-slate-200 px-4 py-2 text-center text-xs text-slate-400 dark:border-slate-800 dark:text-slate-500">
           All data is stored locally in this browser — export a backup regularly.
         </footer>
       </div>

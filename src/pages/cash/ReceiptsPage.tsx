@@ -270,17 +270,17 @@ export function ReceiptsPage() {
             </div>
 
             {!partyId ? (
-              <p className="text-sm text-slate-400">Select a customer to see their open invoices.</p>
+              <p className="text-sm text-slate-400 dark:text-slate-500">Select a customer to see their open invoices.</p>
             ) : openQuery.loading ? (
               <Spinner label="Loading open invoices…" />
             ) : openList.length === 0 ? (
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-slate-400 dark:text-slate-500">
                 No open invoices for this customer — the receipt will be treated as an advance.
               </p>
             ) : (
-              <div className="max-h-64 overflow-y-auto rounded-md border border-slate-200">
+              <div className="max-h-64 overflow-y-auto rounded-md border border-slate-200 dark:border-slate-800">
                 <table className="min-w-full text-sm">
-                  <thead className="bg-slate-50">
+                  <thead className="bg-slate-50 dark:bg-slate-900">
                     <tr>
                       <th className="th text-left">Invoice</th>
                       <th className="th text-left">Due</th>
@@ -288,7 +288,7 @@ export function ReceiptsPage() {
                       <th className="th text-right">Allocate</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {openList.map((row) => (
                       <tr key={row.invoice.id}>
                         <td className="px-3 py-1.5">{row.invoice.number}</td>
@@ -312,11 +312,11 @@ export function ReceiptsPage() {
             )}
 
             {allocatedTotal > 0 && (
-              <p className="mt-2 text-xs text-slate-500">
+              <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
                 Allocating <span className="font-medium">{formatINR(allocatedTotal)}</span> of{' '}
                 {formatINR(amount)}
                 {allocatedTotal > amount && (
-                  <span className="text-red-600"> — more than the receipt amount.</span>
+                  <span className="text-red-600 dark:text-red-400"> — more than the receipt amount.</span>
                 )}
               </p>
             )}

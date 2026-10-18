@@ -236,7 +236,7 @@ export function UsersPage() {
       >
         <div className="space-y-3">
           {task.error && <Alert tone="error">{task.error}</Alert>}
-          <p className="text-sm text-slate-600">
+          <p className="text-sm text-slate-600 dark:text-slate-300">
             The new password must be at least 6 characters and contain a letter and a digit.
           </p>
           <Field label="New password" required>

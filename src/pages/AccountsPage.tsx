@@ -121,7 +121,7 @@ export function AccountsPage() {
       label: 'Control',
       align: 'center',
       render: (row) =>
-        row.isControl ? <Badge tone="violet">Control</Badge> : <span className="text-slate-400">—</span>,
+        row.isControl ? <Badge tone="violet">Control</Badge> : <span className="text-slate-400 dark:text-slate-500">—</span>,
     },
     {
       key: 'active',
@@ -151,7 +151,7 @@ export function AccountsPage() {
       />
 
       <Card bodyClassName="p-0">
-        <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 p-3">
+        <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 dark:border-slate-800 p-3">
           <Input
             className="w-56"
             placeholder="Search code or name"
@@ -250,7 +250,7 @@ export function AccountsPage() {
           </div>
 
           <div className="flex flex-wrap gap-4 pt-1">
-            <label className="flex items-center gap-2 text-sm text-slate-700">
+            <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
               <input
                 type="checkbox"
                 checked={form.isControl}
@@ -258,7 +258,7 @@ export function AccountsPage() {
               />
               Control account
             </label>
-            <label className="flex items-center gap-2 text-sm text-slate-700">
+            <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
               <input
                 type="checkbox"
                 checked={form.isBank}
@@ -266,7 +266,7 @@ export function AccountsPage() {
               />
               Bank
             </label>
-            <label className="flex items-center gap-2 text-sm text-slate-700">
+            <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
               <input
                 type="checkbox"
                 checked={form.isCash}
@@ -274,7 +274,7 @@ export function AccountsPage() {
               />
               Cash
             </label>
-            <label className="flex items-center gap-2 text-sm text-slate-700">
+            <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
               <input
                 type="checkbox"
                 checked={form.isContra}
@@ -282,7 +282,7 @@ export function AccountsPage() {
               />
               Contra
             </label>
-            <label className="flex items-center gap-2 text-sm text-slate-700">
+            <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
               <input
                 type="checkbox"
                 checked={form.active}

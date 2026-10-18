@@ -269,7 +269,7 @@ export function PaymentsPage() {
             </Field>
           </div>
 
-          <label className="flex items-start gap-2 text-sm text-slate-700">
+          <label className="flex items-start gap-2 text-sm text-slate-700 dark:text-slate-300">
             <input
               type="checkbox"
               className="mt-0.5"
@@ -278,7 +278,7 @@ export function PaymentsPage() {
             />
             <span>
               Raise as a payment request (needs approval)
-              <span className="block text-xs text-slate-500">
+              <span className="block text-xs text-slate-500 dark:text-slate-400">
                 The payment is parked as PENDING and only posts to the ledger, and settles
                 invoices, once a different authorised user approves it.
               </span>
@@ -294,17 +294,17 @@ export function PaymentsPage() {
             </div>
 
             {!partyId ? (
-              <p className="text-sm text-slate-400">Select a supplier to see their open invoices.</p>
+              <p className="text-sm text-slate-400 dark:text-slate-500">Select a supplier to see their open invoices.</p>
             ) : openQuery.loading ? (
               <Spinner label="Loading open invoices…" />
             ) : openList.length === 0 ? (
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-slate-400 dark:text-slate-500">
                 No open invoices for this supplier — the payment will be treated as an advance.
               </p>
             ) : (
-              <div className="max-h-64 overflow-y-auto rounded-md border border-slate-200">
+              <div className="max-h-64 overflow-y-auto rounded-md border border-slate-200 dark:border-slate-800">
                 <table className="min-w-full text-sm">
-                  <thead className="bg-slate-50">
+                  <thead className="bg-slate-50 dark:bg-slate-900">
                     <tr>
                       <th className="th text-left">Invoice</th>
                       <th className="th text-left">Due</th>
@@ -312,7 +312,7 @@ export function PaymentsPage() {
                       <th className="th text-right">Allocate</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                     {openList.map((row) => (
                       <tr key={row.invoice.id}>
                         <td className="px-3 py-1.5">{row.invoice.number}</td>
@@ -336,11 +336,11 @@ export function PaymentsPage() {
             )}
 
             {allocatedTotal > 0 && (
-              <p className="mt-2 text-xs text-slate-500">
+              <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
                 Allocating <span className="font-medium">{formatINR(allocatedTotal)}</span> of{' '}
                 {formatINR(amount)}
                 {allocatedTotal > amount && (
-                  <span className="text-red-600"> — more than the payment amount.</span>
+                  <span className="text-red-600 dark:text-red-400"> — more than the payment amount.</span>
                 )}
               </p>
             )}

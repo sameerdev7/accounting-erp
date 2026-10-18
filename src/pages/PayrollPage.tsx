@@ -231,7 +231,7 @@ export function PayrollPage() {
             loading={runs.loading}
             empty="No payroll has been run yet."
             onRowClick={(row) => setSelectedRunId(row.id)}
-            rowClassName={(row) => (row.id === selectedRunId ? 'bg-brand-50' : '')}
+            rowClassName={(row) => (row.id === selectedRunId ? 'bg-brand-50 dark:bg-brand-500/10' : '')}
           />
         </Card>
 
@@ -296,7 +296,7 @@ export function PayrollPage() {
               <Alert tone="success">{payTask.notice}</Alert>
             </div>
           )}
-          <p className="mb-3 text-sm text-slate-500">
+          <p className="mb-3 text-sm text-slate-500 dark:text-slate-400">
             Net payout for this run: <span className="font-semibold">{formatINR(selectedRun.netTotal)}</span>
           </p>
           <DataTable

@@ -146,7 +146,7 @@ export function SalesReturnsPage() {
     {
       key: 'narration',
       label: 'Narration',
-      render: (row) => <span className="text-slate-500">{row.narration || '—'}</span>,
+      render: (row) => <span className="text-slate-500 dark:text-slate-400">{row.narration || '—'}</span>,
     },
   ]
 
@@ -232,14 +232,14 @@ export function SalesReturnsPage() {
 
         <div className="mt-4">
           <div className="mb-2 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-slate-700">Returned items</h3>
+            <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Returned items</h3>
             <Button onClick={() => setLines((current) => [...current, emptyLine()])}>Add line</Button>
           </div>
 
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
               <thead>
-                <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
+                <tr className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                   <th className="th w-64">Item</th>
                   <th className="th">Description</th>
                   <th className="th w-20 text-right">Qty</th>
@@ -253,7 +253,7 @@ export function SalesReturnsPage() {
                 {lines.map((line) => {
                   const taxable = Math.round(numberValue(line.qty) * line.rate)
                   return (
-                    <tr key={line.key} className="border-b border-slate-100">
+                    <tr key={line.key} className="border-b border-slate-100 dark:border-slate-800">
                       <td className="px-2 py-2">
                         <ItemSelect
                           value={line.itemId}
@@ -338,7 +338,7 @@ export function SalesReturnsPage() {
                           ))}
                         </Select>
                       </td>
-                      <td className="px-2 py-2 text-right tabular-nums text-slate-600">
+                      <td className="px-2 py-2 text-right tabular-nums text-slate-600 dark:text-slate-300">
                         {formatINR(taxable + Math.round((taxable * line.gstRate) / 100))}
                       </td>
                       <td className="px-2 py-2 text-right">

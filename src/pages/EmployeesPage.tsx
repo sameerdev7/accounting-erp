@@ -174,7 +174,7 @@ export function EmployeesPage() {
               setDays((prev) => ({ ...prev, [row.id]: Number(event.target.value) }))
             }
           />
-          <span className="text-xs text-slate-400">/ {daysInSelectedMonth}</span>
+          <span className="text-xs text-slate-400 dark:text-slate-500">/ {daysInSelectedMonth}</span>
           <Button
             variant="secondary"
             disabled={!canEdit || attTask.running}
@@ -216,7 +216,7 @@ export function EmployeesPage() {
         <Card
           title="Attendance"
           actions={
-            <label className="flex items-center gap-2 text-sm text-slate-600">
+            <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
               Month
               <Input
                 type="month"
@@ -296,7 +296,7 @@ export function EmployeesPage() {
           </div>
 
           <div className="flex flex-wrap gap-4 pt-1">
-            <label className="flex items-center gap-2 text-sm text-slate-700">
+            <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
               <input
                 type="checkbox"
                 checked={form.pfApplicable}
@@ -304,7 +304,7 @@ export function EmployeesPage() {
               />
               PF applicable
             </label>
-            <label className="flex items-center gap-2 text-sm text-slate-700">
+            <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
               <input
                 type="checkbox"
                 checked={form.ptApplicable}
@@ -312,7 +312,7 @@ export function EmployeesPage() {
               />
               Professional tax applicable
             </label>
-            <label className="flex items-center gap-2 text-sm text-slate-700">
+            <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
               <input
                 type="checkbox"
                 checked={form.active}

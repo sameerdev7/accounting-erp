@@ -140,7 +140,7 @@ export function JournalsPage() {
               <PartySelect value={partyId} onChange={setPartyId} parties={parties} />
             </Field>
             <Field label="Posting">
-              <label className="flex items-center gap-2 pt-2 text-sm text-slate-700">
+              <label className="flex items-center gap-2 pt-2 text-sm text-slate-700 dark:text-slate-300">
                 <input
                   type="checkbox"
                   checked={postNow}
@@ -162,7 +162,7 @@ export function JournalsPage() {
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
               <thead>
-                <tr className="border-b border-slate-200 text-left text-xs uppercase tracking-wide text-slate-500">
+                <tr className="border-b border-slate-200 dark:border-slate-800 text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                   <th className="py-1.5">Account</th>
                   <th className="py-1.5 text-right">Debit</th>
                   <th className="py-1.5 text-right">Credit</th>
@@ -172,7 +172,7 @@ export function JournalsPage() {
               </thead>
               <tbody>
                 {lines.map((line) => (
-                  <tr key={line.key} className="border-b border-slate-100">
+                  <tr key={line.key} className="border-b border-slate-100 dark:border-slate-800">
                     <td className="py-1.5 pr-2">
                       <AccountSelect
                         value={line.accountId}

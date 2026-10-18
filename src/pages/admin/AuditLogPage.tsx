@@ -74,7 +74,7 @@ export function AuditLogPage() {
       />
 
       <Card bodyClassName="p-0">
-        <div className="flex flex-wrap items-end gap-2 border-b border-slate-200 p-3">
+        <div className="flex flex-wrap items-end gap-2 border-b border-slate-200 dark:border-slate-800 p-3">
           <Field label="From">
             <Input type="date" value={from} onChange={(event) => setFrom(event.target.value)} />
           </Field>
@@ -130,7 +130,7 @@ export function AuditLogPage() {
       </Card>
 
       {rows.length > DISPLAY_LIMIT && (
-        <p className="mt-2 text-xs text-slate-500">
+        <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
           Showing the {DISPLAY_LIMIT} most recent of {rows.length} matching entries. Narrow the
           filters to see older activity.
         </p>

@@ -88,7 +88,7 @@ export function VoucherActions({
         </Button>
       )}
 
-      {error && <span className="text-xs text-red-600">{error}</span>}
+      {error && <span className="text-xs text-red-600 dark:text-red-400">{error}</span>}
 
       <Modal
         open={reversing}
@@ -114,7 +114,7 @@ export function VoucherActions({
           </>
         }
       >
-        <p className="mb-2 text-sm text-slate-600">
+        <p className="mb-2 text-sm text-slate-600 dark:text-slate-300">
           A posted voucher is never edited. Reversing it posts a mirror entry so the ledger and the
           audit trail both remain intact.
         </p>

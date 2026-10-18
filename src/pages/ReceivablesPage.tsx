@@ -89,7 +89,7 @@ export function ReceivablesPage() {
           report={data}
           loading={loading}
           actions={
-            <label className="text-xs text-slate-500">
+            <label className="text-xs text-slate-500 dark:text-slate-400">
               As on
               <DateInput className="mt-1" value={asOn} onChange={setAsOn} />
             </label>

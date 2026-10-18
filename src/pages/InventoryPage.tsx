@@ -139,7 +139,7 @@ export function InventoryPage() {
 
       <div className="mt-4">
         <Card title="Period-end inventory close">
-          <p className="mb-3 text-sm text-slate-600">
+          <p className="mb-3 text-sm text-slate-600 dark:text-slate-300">
             Inventory is valued by the periodic method: purchases accumulate in the Purchases
             account and are only charged to Cost of Goods Sold when a period is closed, using
             opening stock plus purchases less the closing stock below. Each month is closed at most
@@ -168,7 +168,7 @@ export function InventoryPage() {
             >
               {task.running ? 'Closing…' : 'Close period'}
             </Button>
-            <label className="mb-1 flex items-center gap-2 text-sm text-slate-600">
+            <label className="mb-1 flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
               <input
                 type="checkbox"
                 checked={reopen}
@@ -179,13 +179,13 @@ export function InventoryPage() {
           </div>
 
           {!can('voucher.post') && (
-            <p className="mt-2 text-xs text-slate-500">
+            <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
               Your role cannot post journals, so you cannot close a period.
             </p>
           )}
 
           {closedMonths && closedMonths.length > 0 && (
-            <p className="mt-3 text-xs text-slate-500">Closed months: {closedMonths.join(', ')}</p>
+            <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">Closed months: {closedMonths.join(', ')}</p>
           )}
         </Card>
       </div>
@@ -196,11 +196,11 @@ export function InventoryPage() {
         onClose={() => setSelectedId(null)}
       >
         {movementRows.length === 0 ? (
-          <p className="text-sm text-slate-400">No stock movements recorded for this item.</p>
+          <p className="text-sm text-slate-400 dark:text-slate-500">No stock movements recorded for this item.</p>
         ) : (
           <div className="max-h-96 overflow-y-auto">
             <table className="min-w-full text-sm">
-              <thead className="bg-slate-50">
+              <thead className="bg-slate-50 dark:bg-slate-900">
                 <tr>
                   <th className="th text-left">Date</th>
                   <th className="th text-left">Type</th>
@@ -210,7 +210,7 @@ export function InventoryPage() {
                   <th className="th text-right">Balance</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {movementRows.map(({ movement, running }) => (
                   <tr key={movement.id}>
                     <td className="px-3 py-1.5">{formatDate(movement.date)}</td>

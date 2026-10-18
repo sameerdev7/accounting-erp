@@ -145,7 +145,7 @@ export function ItemsPage() {
       />
 
       <Card bodyClassName="p-0">
-        <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 p-3">
+        <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 dark:border-slate-800 p-3">
           <Input
             className="w-56"
             placeholder="Search SKU, name or HSN"
@@ -248,7 +248,7 @@ export function ItemsPage() {
             </Field>
           </div>
 
-          <label className="flex items-center gap-2 text-sm text-slate-700">
+          <label className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
             <input
               type="checkbox"
               checked={form.active}

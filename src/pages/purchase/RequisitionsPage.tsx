@@ -136,7 +136,7 @@ export function RequisitionsPage() {
     {
       key: 'narration',
       label: 'Narration',
-      render: (row) => <span className="text-slate-500">{row.narration || '—'}</span>,
+      render: (row) => <span className="text-slate-500 dark:text-slate-400">{row.narration || '—'}</span>,
     },
     {
       key: 'actions',
@@ -256,14 +256,14 @@ export function RequisitionsPage() {
 
         <div className="mt-4">
           <div className="mb-2 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-slate-700">Items</h3>
+            <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Items</h3>
             <Button onClick={() => setLines((current) => [...current, emptyLine()])}>Add line</Button>
           </div>
 
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
               <thead>
-                <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
+                <tr className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                   <th className="th">Item</th>
                   <th className="th w-24 text-right">Qty</th>
                   <th className="th w-40 text-right">Est. rate</th>
@@ -273,7 +273,7 @@ export function RequisitionsPage() {
               </thead>
               <tbody>
                 {lines.map((line) => (
-                  <tr key={line.key} className="border-b border-slate-100">
+                  <tr key={line.key} className="border-b border-slate-100 dark:border-slate-800">
                     <td className="px-2 py-2">
                       <ItemSelect
                         value={line.itemId}
@@ -324,7 +324,7 @@ export function RequisitionsPage() {
                         }
                       />
                     </td>
-                    <td className="px-2 py-2 text-right tabular-nums text-slate-600">
+                    <td className="px-2 py-2 text-right tabular-nums text-slate-600 dark:text-slate-300">
                       {formatINR(Math.round(numberValue(line.qty) * line.estimatedRate))}
                     </td>
                     <td className="px-2 py-2 text-right">
@@ -358,11 +358,11 @@ export function RequisitionsPage() {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               <div>
                 <p className="label">Date</p>
-                <p className="text-sm text-slate-700">{formatDate(detail.date)}</p>
+                <p className="text-sm text-slate-700 dark:text-slate-300">{formatDate(detail.date)}</p>
               </div>
               <div>
                 <p className="label">Department</p>
-                <p className="text-sm text-slate-700">{detail.department || '—'}</p>
+                <p className="text-sm text-slate-700 dark:text-slate-300">{detail.department || '—'}</p>
               </div>
               <div>
                 <p className="label">Status</p>
@@ -370,7 +370,7 @@ export function RequisitionsPage() {
               </div>
               <div>
                 <p className="label">Narration</p>
-                <p className="text-sm text-slate-700">{detail.narration || '—'}</p>
+                <p className="text-sm text-slate-700 dark:text-slate-300">{detail.narration || '—'}</p>
               </div>
             </div>
 
@@ -381,7 +381,7 @@ export function RequisitionsPage() {
             )}
 
             <div className="mt-4">
-              <h3 className="mb-2 text-sm font-semibold text-slate-700">Requested items</h3>
+              <h3 className="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Requested items</h3>
               {detailLines.loading ? (
                 <Spinner />
               ) : (detailLines.data ?? []).length === 0 ? (
@@ -389,7 +389,7 @@ export function RequisitionsPage() {
               ) : (
                 <table className="min-w-full text-sm">
                   <thead>
-                    <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
+                    <tr className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                       <th className="th">Item</th>
                       <th className="th text-right">Qty</th>
                       <th className="th text-right">Est. rate</th>
@@ -398,7 +398,7 @@ export function RequisitionsPage() {
                   </thead>
                   <tbody>
                     {(detailLines.data ?? []).map((line) => (
-                      <tr key={line.id} className="border-b border-slate-100">
+                      <tr key={line.id} className="border-b border-slate-100 dark:border-slate-800">
                         <td className="px-2 py-2">{itemNames.get(line.itemId) ?? line.itemId}</td>
                         <td className="px-2 py-2 text-right tabular-nums">{formatQty(line.qty)}</td>
                         <td className="px-2 py-2 text-right tabular-nums">

@@ -288,19 +288,19 @@ function CompanyForm({ company }: { company: Company }) {
       <Card title="Books settings (read-only)">
         <dl className="space-y-4 text-sm">
           <div>
-            <dt className="text-xs font-medium uppercase tracking-wide text-slate-500">
+            <dt className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
               Financial year starts
             </dt>
-            <dd className="mt-0.5 text-slate-800">
+            <dd className="mt-0.5 text-slate-800 dark:text-slate-200">
               {MONTH_NAMES[(company.financialYearStartMonth || 1) - 1]} ({company.financialYearStartMonth})
             </dd>
           </div>
           <div>
-            <dt className="text-xs font-medium uppercase tracking-wide text-slate-500">Books begin date</dt>
-            <dd className="mt-0.5 text-slate-800">{formatDate(company.booksBeginDate)}</dd>
+            <dt className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">Books begin date</dt>
+            <dd className="mt-0.5 text-slate-800 dark:text-slate-200">{formatDate(company.booksBeginDate)}</dd>
           </div>
           <div>
-            <dt className="text-xs font-medium uppercase tracking-wide text-slate-500">
+            <dt className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
               Document prefixes
             </dt>
             <dd className="mt-1 flex flex-wrap gap-1">
@@ -310,7 +310,7 @@ function CompanyForm({ company }: { company: Company }) {
                 </Badge>
               ))}
               {Object.keys(company.prefixes).length === 0 && (
-                <span className="text-slate-400">—</span>
+                <span className="text-slate-400 dark:text-slate-500">—</span>
               )}
             </dd>
           </div>

@@ -250,14 +250,14 @@ export function PurchaseOrdersPage() {
 
         <div className="mt-4">
           <div className="mb-2 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-slate-700">Order lines</h3>
+            <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Order lines</h3>
             <Button onClick={() => setLines((current) => [...current, emptyLine()])}>Add line</Button>
           </div>
 
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
               <thead>
-                <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
+                <tr className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                   <th className="th">Item</th>
                   <th className="th w-24 text-right">Qty</th>
                   <th className="th w-36 text-right">Rate</th>
@@ -268,7 +268,7 @@ export function PurchaseOrdersPage() {
               </thead>
               <tbody>
                 {lines.map((line) => (
-                  <tr key={line.key} className="border-b border-slate-100">
+                  <tr key={line.key} className="border-b border-slate-100 dark:border-slate-800">
                     <td className="px-2 py-2">
                       <ItemSelect
                         value={line.itemId}
@@ -311,7 +311,7 @@ export function PurchaseOrdersPage() {
                         ))}
                       </Select>
                     </td>
-                    <td className="px-2 py-2 text-right tabular-nums text-slate-600">
+                    <td className="px-2 py-2 text-right tabular-nums text-slate-600 dark:text-slate-300">
                       {formatINR(Math.round(numberValue(line.qty) * line.rate))}
                     </td>
                     <td className="px-2 py-2 text-right">
@@ -364,17 +364,17 @@ export function PurchaseOrdersPage() {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               <div>
                 <p className="label">Supplier</p>
-                <p className="text-sm text-slate-700">
+                <p className="text-sm text-slate-700 dark:text-slate-300">
                   {supplierNames.get(detail.supplierId) ?? detail.supplierId}
                 </p>
               </div>
               <div>
                 <p className="label">Date</p>
-                <p className="text-sm text-slate-700">{formatDate(detail.date)}</p>
+                <p className="text-sm text-slate-700 dark:text-slate-300">{formatDate(detail.date)}</p>
               </div>
               <div>
                 <p className="label">Expected</p>
-                <p className="text-sm text-slate-700">{formatDate(detail.expectedDate)}</p>
+                <p className="text-sm text-slate-700 dark:text-slate-300">{formatDate(detail.expectedDate)}</p>
               </div>
               <div>
                 <p className="label">Status</p>
@@ -383,7 +383,7 @@ export function PurchaseOrdersPage() {
             </div>
 
             <div className="mt-4">
-              <h3 className="mb-2 text-sm font-semibold text-slate-700">Order lines</h3>
+              <h3 className="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Order lines</h3>
               {detailLines.loading ? (
                 <Spinner />
               ) : (detailLines.data ?? []).length === 0 ? (
@@ -391,7 +391,7 @@ export function PurchaseOrdersPage() {
               ) : (
                 <table className="min-w-full text-sm">
                   <thead>
-                    <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
+                    <tr className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                       <th className="th">Item</th>
                       <th className="th text-right">Qty</th>
                       <th className="th text-right">Rate</th>
@@ -401,7 +401,7 @@ export function PurchaseOrdersPage() {
                   </thead>
                   <tbody>
                     {(detailLines.data ?? []).map((line) => (
-                      <tr key={line.id} className="border-b border-slate-100">
+                      <tr key={line.id} className="border-b border-slate-100 dark:border-slate-800">
                         <td className="px-2 py-2">{itemNames.get(line.itemId) ?? line.itemId}</td>
                         <td className="px-2 py-2 text-right tabular-nums">{formatQty(line.qty)}</td>
                         <td className="px-2 py-2 text-right tabular-nums">{formatINR(line.rate)}</td>

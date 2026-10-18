@@ -10,6 +10,25 @@
     />
     <meta name="theme-color" content="#1a39b0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      // Apply the saved theme before the app paints, so there is no flash of the
+      // wrong colour scheme. Mirrors src/store/theme.ts.
+      (function () {
+        try {
+          var mode = localStorage.getItem('sai-erp-theme') || 'system'
+          var dark =
+            mode === 'dark' ||
+            (mode === 'system' &&
+              window.matchMedia &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches)
+          var root = document.documentElement
+          root.classList.toggle('dark', dark)
+          root.style.colorScheme = dark ? 'dark' : 'light'
+        } catch (e) {
+          /* localStorage unavailable — fall back to the light theme */
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

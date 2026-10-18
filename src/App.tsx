@@ -60,7 +60,7 @@ function Bootstrap({ children }: { children: React.ReactNode }) {
   return loading ? (
     <div className="flex min-h-screen items-center justify-center">
       {error ? (
-        <p className="text-sm text-red-600">Could not prepare the local database: {error}</p>
+        <p className="text-sm text-red-600 dark:text-red-400">Could not prepare the local database: {error}</p>
       ) : (
         <Spinner label="Preparing the books for the first time…" />
       )}
@@ -83,8 +83,8 @@ function RequirePermission({ permission, children }: { permission: Permission; c
   if (!can(permission)) {
     return (
       <div className="card card-pad">
-        <h1 className="text-base font-semibold text-slate-800">Not permitted</h1>
-        <p className="mt-1 text-sm text-slate-500">
+        <h1 className="text-base font-semibold text-slate-800 dark:text-slate-200">Not permitted</h1>
+        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
           Your role does not have access to this screen. Speak to the administrator if you believe this
           is a mistake.
         </p>

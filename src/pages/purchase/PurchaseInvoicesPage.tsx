@@ -375,14 +375,14 @@ export function PurchaseInvoicesPage() {
 
         <div className="mt-4">
           <div className="mb-2 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-slate-700">Invoice lines</h3>
+            <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Invoice lines</h3>
             <Button onClick={() => setLines((current) => [...current, emptyLine()])}>Add line</Button>
           </div>
 
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
               <thead>
-                <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
+                <tr className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                   <th className="th">Item</th>
                   <th className="th">Description</th>
                   <th className="th w-24">HSN</th>
@@ -394,7 +394,7 @@ export function PurchaseInvoicesPage() {
               </thead>
               <tbody>
                 {lines.map((line) => (
-                  <tr key={line.key} className="border-b border-slate-100">
+                  <tr key={line.key} className="border-b border-slate-100 dark:border-slate-800">
                     <td className="px-2 py-2 min-w-[12rem]">
                       <ItemSelect
                         value={line.itemId}
@@ -468,7 +468,7 @@ export function PurchaseInvoicesPage() {
               </tbody>
             </table>
           </div>
-          <p className="mt-2 text-xs text-slate-400">
+          <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">
             Taxable value, CGST/SGST or IGST and the round-off are computed by the posting engine when
             the invoice is saved.
           </p>
@@ -522,13 +522,13 @@ export function PurchaseInvoicesPage() {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               <div>
                 <p className="label">Supplier</p>
-                <p className="text-sm text-slate-700">
+                <p className="text-sm text-slate-700 dark:text-slate-300">
                   {supplierNames.get(detail.partyId) ?? detail.partyId}
                 </p>
               </div>
               <div>
                 <p className="label">Supplier ref</p>
-                <p className="text-sm text-slate-700">{detail.partyInvoiceNumber || '—'}</p>
+                <p className="text-sm text-slate-700 dark:text-slate-300">{detail.partyInvoiceNumber || '—'}</p>
               </div>
               <div>
                 <p className="label">Status</p>
@@ -536,22 +536,22 @@ export function PurchaseInvoicesPage() {
               </div>
               <div>
                 <p className="label">Invoice date</p>
-                <p className="text-sm text-slate-700">{formatDate(detail.date)}</p>
+                <p className="text-sm text-slate-700 dark:text-slate-300">{formatDate(detail.date)}</p>
               </div>
               <div>
                 <p className="label">Due date</p>
-                <p className="text-sm text-slate-700">{formatDate(detail.dueDate)}</p>
+                <p className="text-sm text-slate-700 dark:text-slate-300">{formatDate(detail.dueDate)}</p>
               </div>
               <div>
                 <p className="label">Place of supply</p>
-                <p className="text-sm text-slate-700">
+                <p className="text-sm text-slate-700 dark:text-slate-300">
                   {detail.placeOfSupply} · {detail.interState ? 'IGST' : 'CGST + SGST'}
                 </p>
               </div>
               {detail.sourceDocId && (
                 <div>
                   <p className="label">Source</p>
-                  <p className="text-sm text-slate-700">
+                  <p className="text-sm text-slate-700 dark:text-slate-300">
                     {detail.sourceDocType === 'GRN'
                       ? grnNumbers.get(detail.sourceDocId) ?? detail.sourceDocId
                       : orderNumbers.get(detail.sourceDocId) ?? detail.sourceDocId}
@@ -561,7 +561,7 @@ export function PurchaseInvoicesPage() {
             </div>
 
             <div className="mt-4">
-              <h3 className="mb-2 text-sm font-semibold text-slate-700">Invoice lines</h3>
+              <h3 className="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Invoice lines</h3>
               {detailLines.loading ? (
                 <Spinner />
               ) : (detailLines.data ?? []).length === 0 ? (
@@ -569,7 +569,7 @@ export function PurchaseInvoicesPage() {
               ) : (
                 <table className="min-w-full text-sm">
                   <thead>
-                    <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
+                    <tr className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                       <th className="th">Description</th>
                       <th className="th">HSN</th>
                       <th className="th text-right">Qty</th>
@@ -580,11 +580,11 @@ export function PurchaseInvoicesPage() {
                   </thead>
                   <tbody>
                     {(detailLines.data ?? []).map((line) => (
-                      <tr key={line.id} className="border-b border-slate-100">
+                      <tr key={line.id} className="border-b border-slate-100 dark:border-slate-800">
                         <td className="px-2 py-2">
                           {line.description}
                           {line.itemId && (
-                            <span className="block text-xs text-slate-400">
+                            <span className="block text-xs text-slate-400 dark:text-slate-500">
                               {itemNames.get(line.itemId) ?? line.itemId}
                             </span>
                           )}
@@ -597,7 +597,7 @@ export function PurchaseInvoicesPage() {
                       </tr>
                     ))}
                   </tbody>
-                  <tfoot className="border-t-2 border-slate-300 font-semibold">
+                  <tfoot className="border-t-2 border-slate-300 dark:border-slate-700 font-semibold">
                     <tr>
                       <td className="px-2 py-2" colSpan={4}>
                         Taxable

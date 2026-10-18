@@ -212,7 +212,7 @@ export function AssetsPage() {
           loading={assets.loading}
           empty="No fixed assets registered."
           onRowClick={(row) => setSelectedAssetId(row.id)}
-          rowClassName={(row) => (row.id === selectedAssetId ? 'bg-brand-50' : '')}
+          rowClassName={(row) => (row.id === selectedAssetId ? 'bg-brand-50 dark:bg-brand-500/10' : '')}
         />
         {assets.error && (
           <div className="mt-3">

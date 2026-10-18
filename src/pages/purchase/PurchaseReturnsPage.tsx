@@ -140,7 +140,7 @@ export function PurchaseReturnsPage() {
     {
       key: 'narration',
       label: 'Narration',
-      render: (row) => <span className="text-slate-500">{row.narration || '—'}</span>,
+      render: (row) => <span className="text-slate-500 dark:text-slate-400">{row.narration || '—'}</span>,
     },
   ]
 
@@ -217,14 +217,14 @@ export function PurchaseReturnsPage() {
 
         <div className="mt-4">
           <div className="mb-2 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-slate-700">Returned items</h3>
+            <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Returned items</h3>
             <Button onClick={() => setLines((current) => [...current, emptyLine()])}>Add line</Button>
           </div>
 
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
               <thead>
-                <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
+                <tr className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                   <th className="th">Item</th>
                   <th className="th">Description</th>
                   <th className="th w-24 text-right">Qty</th>
@@ -235,7 +235,7 @@ export function PurchaseReturnsPage() {
               </thead>
               <tbody>
                 {lines.map((line) => (
-                  <tr key={line.key} className="border-b border-slate-100">
+                  <tr key={line.key} className="border-b border-slate-100 dark:border-slate-800">
                     <td className="px-2 py-2 min-w-[12rem]">
                       <ItemSelect
                         value={line.itemId}
@@ -319,17 +319,17 @@ export function PurchaseReturnsPage() {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               <div>
                 <p className="label">Supplier</p>
-                <p className="text-sm text-slate-700">
+                <p className="text-sm text-slate-700 dark:text-slate-300">
                   {detail.partyId ? supplierNames.get(detail.partyId) ?? detail.partyId : '—'}
                 </p>
               </div>
               <div>
                 <p className="label">Date</p>
-                <p className="text-sm text-slate-700">{formatDate(detail.date)}</p>
+                <p className="text-sm text-slate-700 dark:text-slate-300">{formatDate(detail.date)}</p>
               </div>
               <div>
                 <p className="label">Amount</p>
-                <p className="text-sm text-slate-700 tabular-nums">{formatINR(detail.amount)}</p>
+                <p className="text-sm text-slate-700 dark:text-slate-300 tabular-nums">{formatINR(detail.amount)}</p>
               </div>
               <div>
                 <p className="label">Status</p>
@@ -338,7 +338,7 @@ export function PurchaseReturnsPage() {
             </div>
 
             <div className="mt-4">
-              <h3 className="mb-2 text-sm font-semibold text-slate-700">Ledger lines</h3>
+              <h3 className="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Ledger lines</h3>
               {detailEntries.loading ? (
                 <Spinner />
               ) : (detailEntries.data ?? []).length === 0 ? (
@@ -346,7 +346,7 @@ export function PurchaseReturnsPage() {
               ) : (
                 <table className="min-w-full text-sm">
                   <thead>
-                    <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
+                    <tr className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                       <th className="th">Account</th>
                       <th className="th text-right">Debit</th>
                       <th className="th text-right">Credit</th>
@@ -354,7 +354,7 @@ export function PurchaseReturnsPage() {
                   </thead>
                   <tbody>
                     {(detailEntries.data ?? []).map((entry) => (
-                      <tr key={entry.id} className="border-b border-slate-100">
+                      <tr key={entry.id} className="border-b border-slate-100 dark:border-slate-800">
                         <td className="px-2 py-2">
                           {accountsById.get(entry.accountId)?.name ?? entry.accountId}
                         </td>
@@ -371,7 +371,7 @@ export function PurchaseReturnsPage() {
               )}
             </div>
 
-            <div className="mt-4 border-t border-slate-200 pt-4">
+            <div className="mt-4 border-t border-slate-200 dark:border-slate-800 pt-4">
               <VoucherActions voucher={detail} />
             </div>
           </>

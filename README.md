@@ -26,6 +26,13 @@ npm run typecheck  # types only
 
 Requires Node 20+ (developed on Node 20.20.2 / npm 10.8.2).
 
+### Theme
+
+The interface ships with a light and a dark theme, chosen from the three-way switch in the top
+bar (or the sign-in screen): **Light**, **Dark**, or **System** to follow the operating system.
+The choice is remembered in `localStorage` and applied before first paint, so there is no flash of
+the wrong colours. Printing always renders on white regardless of the active theme.
+
 ### Sign-in accounts
 
 All six users share the password **`erp1234`** (the sign-in page lists them as one-click

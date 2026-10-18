@@ -258,14 +258,14 @@ export function SalesOrdersPage() {
 
         <div className="mt-4">
           <div className="mb-2 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-slate-700">Items</h3>
+            <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Items</h3>
             <Button onClick={() => setLines((current) => [...current, emptyLine()])}>Add line</Button>
           </div>
 
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
               <thead>
-                <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
+                <tr className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                   <th className="th">Item</th>
                   <th className="th w-24 text-right">Qty</th>
                   <th className="th w-36 text-right">Rate</th>
@@ -276,7 +276,7 @@ export function SalesOrdersPage() {
               </thead>
               <tbody>
                 {lines.map((line) => (
-                  <tr key={line.key} className="border-b border-slate-100">
+                  <tr key={line.key} className="border-b border-slate-100 dark:border-slate-800">
                     <td className="px-2 py-2">
                       <ItemSelect
                         value={line.itemId}
@@ -350,7 +350,7 @@ export function SalesOrdersPage() {
                         ))}
                       </Select>
                     </td>
-                    <td className="px-2 py-2 text-right tabular-nums text-slate-600">
+                    <td className="px-2 py-2 text-right tabular-nums text-slate-600 dark:text-slate-300">
                       {formatINR(lineTotal(numberValue(line.qty), line.rate, line.gstRate))}
                     </td>
                     <td className="px-2 py-2 text-right">
@@ -384,15 +384,15 @@ export function SalesOrdersPage() {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               <div>
                 <p className="label">Date</p>
-                <p className="text-sm text-slate-700">{formatDate(detail.date)}</p>
+                <p className="text-sm text-slate-700 dark:text-slate-300">{formatDate(detail.date)}</p>
               </div>
               <div>
                 <p className="label">Expected</p>
-                <p className="text-sm text-slate-700">{formatDate(detail.expectedDate)}</p>
+                <p className="text-sm text-slate-700 dark:text-slate-300">{formatDate(detail.expectedDate)}</p>
               </div>
               <div>
                 <p className="label">Customer</p>
-                <p className="text-sm text-slate-700">
+                <p className="text-sm text-slate-700 dark:text-slate-300">
                   {customerNames.get(detail.customerId) ?? detail.customerId}
                 </p>
               </div>
@@ -403,14 +403,14 @@ export function SalesOrdersPage() {
             </div>
 
             {detail.narration && (
-              <p className="mt-3 text-sm text-slate-600">
-                <span className="text-slate-400">Narration: </span>
+              <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">
+                <span className="text-slate-400 dark:text-slate-500">Narration: </span>
                 {detail.narration}
               </p>
             )}
 
             <div className="mt-4">
-              <h3 className="mb-2 text-sm font-semibold text-slate-700">Ordered items</h3>
+              <h3 className="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Ordered items</h3>
               {detailLines.loading ? (
                 <Spinner />
               ) : (detailLines.data ?? []).length === 0 ? (
@@ -418,7 +418,7 @@ export function SalesOrdersPage() {
               ) : (
                 <table className="min-w-full text-sm">
                   <thead>
-                    <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
+                    <tr className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                       <th className="th">Item</th>
                       <th className="th text-right">Qty</th>
                       <th className="th text-right">Rate</th>
@@ -428,7 +428,7 @@ export function SalesOrdersPage() {
                   </thead>
                   <tbody>
                     {(detailLines.data ?? []).map((line) => (
-                      <tr key={line.id} className="border-b border-slate-100">
+                      <tr key={line.id} className="border-b border-slate-100 dark:border-slate-800">
                         <td className="px-2 py-2">{itemNames.get(line.itemId) ?? line.itemId}</td>
                         <td className="px-2 py-2 text-right tabular-nums">{formatQty(line.qty)}</td>
                         <td className="px-2 py-2 text-right tabular-nums">{formatINR(line.rate)}</td>

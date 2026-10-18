@@ -278,7 +278,7 @@ export function GrnPage() {
         </div>
 
         <div className="mt-4">
-          <h3 className="mb-2 text-sm font-semibold text-slate-700">Receipt lines</h3>
+          <h3 className="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Receipt lines</h3>
           {!poId ? (
             <EmptyState message="Pick a purchase order to load its outstanding lines." />
           ) : poLinesState.loading || receivedState.loading ? (
@@ -289,7 +289,7 @@ export function GrnPage() {
             <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
                 <thead>
-                  <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
+                  <tr className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                     <th className="th">Item</th>
                     <th className="th text-right">Ordered</th>
                     <th className="th text-right">Already received</th>
@@ -302,10 +302,10 @@ export function GrnPage() {
                   {drafts.map((row) => {
                     const accepted = numberValue(row.receivedQty) - numberValue(row.rejectedQty)
                     return (
-                      <tr key={row.poLineId} className="border-b border-slate-100">
+                      <tr key={row.poLineId} className="border-b border-slate-100 dark:border-slate-800">
                         <td className="px-2 py-2">{itemNames.get(row.itemId) ?? row.itemId}</td>
                         <td className="px-2 py-2 text-right tabular-nums">{formatQty(row.orderedQty)}</td>
-                        <td className="px-2 py-2 text-right tabular-nums text-slate-500">
+                        <td className="px-2 py-2 text-right tabular-nums text-slate-500 dark:text-slate-400">
                           {formatQty(row.orderedQty - row.remaining)}
                         </td>
                         <td className="px-2 py-2">
@@ -334,7 +334,7 @@ export function GrnPage() {
                         </td>
                         <td
                           className={`px-2 py-2 text-right tabular-nums ${
-                            accepted < 0 ? 'text-red-600' : 'text-slate-600'
+                            accepted < 0 ? 'text-red-600 dark:text-red-400' : 'text-slate-600 dark:text-slate-300'
                           }`}
                         >
                           {formatQty(accepted)}
@@ -346,7 +346,7 @@ export function GrnPage() {
               </table>
             </div>
           )}
-          <p className="mt-2 text-xs text-slate-400">
+          <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">
             Only the accepted quantity (received less rejected) enters stock. Posting the receipt moves
             quantity; the purchase invoice values it in the ledger.
           </p>
@@ -379,17 +379,17 @@ export function GrnPage() {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               <div>
                 <p className="label">PO</p>
-                <p className="text-sm text-slate-700">{poNumbers.get(detail.poId) ?? detail.poId}</p>
+                <p className="text-sm text-slate-700 dark:text-slate-300">{poNumbers.get(detail.poId) ?? detail.poId}</p>
               </div>
               <div>
                 <p className="label">Supplier</p>
-                <p className="text-sm text-slate-700">
+                <p className="text-sm text-slate-700 dark:text-slate-300">
                   {supplierNames.get(detail.supplierId) ?? detail.supplierId}
                 </p>
               </div>
               <div>
                 <p className="label">Date</p>
-                <p className="text-sm text-slate-700">{formatDate(detail.date)}</p>
+                <p className="text-sm text-slate-700 dark:text-slate-300">{formatDate(detail.date)}</p>
               </div>
               <div>
                 <p className="label">Status</p>
@@ -398,7 +398,7 @@ export function GrnPage() {
             </div>
 
             <div className="mt-4">
-              <h3 className="mb-2 text-sm font-semibold text-slate-700">Received lines</h3>
+              <h3 className="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Received lines</h3>
               {detailLines.loading ? (
                 <Spinner />
               ) : (detailLines.data ?? []).length === 0 ? (
@@ -406,7 +406,7 @@ export function GrnPage() {
               ) : (
                 <table className="min-w-full text-sm">
                   <thead>
-                    <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
+                    <tr className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                       <th className="th">Item</th>
                       <th className="th text-right">Ordered</th>
                       <th className="th text-right">Received</th>
@@ -417,7 +417,7 @@ export function GrnPage() {
                   </thead>
                   <tbody>
                     {(detailLines.data ?? []).map((line) => (
-                      <tr key={line.id} className="border-b border-slate-100">
+                      <tr key={line.id} className="border-b border-slate-100 dark:border-slate-800">
                         <td className="px-2 py-2">{itemNames.get(line.itemId) ?? line.itemId}</td>
                         <td className="px-2 py-2 text-right tabular-nums">{formatQty(line.orderedQty)}</td>
                         <td className="px-2 py-2 text-right tabular-nums">{formatQty(line.receivedQty)}</td>

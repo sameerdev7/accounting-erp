@@ -60,8 +60,8 @@ export function DataTable<T>({
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-slate-200">
-        <thead className="bg-slate-50">
+      <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-800">
+        <thead className="bg-slate-50 dark:bg-slate-800/50">
           <tr>
             {columns.map((column) => (
               <th
@@ -74,17 +74,20 @@ export function DataTable<T>({
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-slate-100 bg-white">
+        <tbody className="divide-y divide-slate-100 bg-white dark:divide-slate-800 dark:bg-transparent">
           {rows.map((row, index) => (
             <tr
               key={getRowId ? getRowId(row, index) : ((cell(row, 'id') as string) ?? index)}
-              className={`${onRowClick ? 'cursor-pointer hover:bg-slate-50' : ''} ${
+              className={`${onRowClick ? 'cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50' : ''} ${
                 rowClassName?.(row) ?? ''
               }`}
               onClick={onRowClick ? () => onRowClick(row) : undefined}
             >
               {columns.map((column) => (
-                <td key={column.key} className={`${pad} ${alignClass(column.align)} ${column.className ?? ''}`}>
+                <td
+                  key={column.key}
+                  className={`${pad} text-slate-700 dark:text-slate-300 ${alignClass(column.align)} ${column.className ?? ''}`}
+                >
                   {column.render
                     ? column.render(row, index)
                     : column.money
@@ -96,10 +99,13 @@ export function DataTable<T>({
           ))}
         </tbody>
         {totalColumns.length > 0 && (
-          <tfoot className="border-t-2 border-slate-300 bg-slate-50 font-semibold">
+          <tfoot className="border-t-2 border-slate-300 bg-slate-50 font-semibold dark:border-slate-700 dark:bg-slate-800/50">
             <tr>
               {columns.map((column, index) => (
-                <td key={column.key} className={`${pad} ${alignClass(column.align)} text-slate-800`}>
+                <td
+                  key={column.key}
+                  className={`${pad} ${alignClass(column.align)} text-slate-800 dark:text-slate-100`}
+                >
                   {index === 0
                     ? totalLabel
                     : column.total

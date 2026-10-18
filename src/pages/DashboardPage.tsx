@@ -15,16 +15,25 @@ import { formatINR, toRupees } from '@/lib/money'
 import { formatDateTime, formatMonthKey } from '@/lib/format'
 import { dashboardSummary } from '@/services/dashboard'
 import { useAsync } from '@/hooks/async'
+import { useTheme } from '@/store/theme'
 import { Card, PageHeader, Spinner, StatCard, StatusBadge, Alert } from '@/components/ui'
 
 export function DashboardPage() {
   const { data, loading, error } = useAsync(() => dashboardSummary(), [])
+  const isDark = useTheme((state) => state.resolved) === 'dark'
+
+  const gridStroke = isDark ? '#1e293b' : '#e2e8f0'
+  const lineStroke = isDark ? '#598bff' : '#2049db'
 
   if (loading || !data) {
     return (
       <>
         <PageHeader title="Dashboard" subtitle="Position as at today" />
-        {error ? <p className="text-sm text-red-600">{error}</p> : <Spinner label="Tallying the books…" />}
+        {error ? (
+          <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+        ) : (
+          <Spinner label="Tallying the books…" />
+        )}
       </>
     )
   }
@@ -84,18 +93,24 @@ export function DashboardPage() {
         <Card title={`GST position — ${formatMonthKey(data.gstMonth)}`}>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-slate-500">Output tax</p>
-              <p className="mt-0.5 text-slate-800">{formatINR(data.gstOutput)}</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                Output tax
+              </p>
+              <p className="mt-0.5 text-slate-800 dark:text-slate-200">{formatINR(data.gstOutput)}</p>
             </div>
             <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-slate-500">Input tax</p>
-              <p className="mt-0.5 text-slate-800">{formatINR(data.gstInput)}</p>
+              <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                Input tax
+              </p>
+              <p className="mt-0.5 text-slate-800 dark:text-slate-200">{formatINR(data.gstInput)}</p>
             </div>
             <div>
-              <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+              <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
                 Net payable to government
               </p>
-              <p className="mt-0.5 font-semibold text-slate-900">{formatINR(data.gstNet)}</p>
+              <p className="mt-0.5 font-semibold text-slate-900 dark:text-slate-100">
+                {formatINR(data.gstNet)}
+              </p>
             </div>
           </div>
         </Card>
@@ -106,7 +121,7 @@ export function DashboardPage() {
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chartData} margin={{ top: 8, right: 8, bottom: 0, left: 8 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <CartesianGrid strokeDasharray="3 3" stroke={gridStroke} />
                 <XAxis dataKey="month" fontSize={12} />
                 <YAxis fontSize={12} tickFormatter={(value) => `₹${Math.round(Number(value) / 1000)}k`} />
                 <Tooltip formatter={(value: number) => formatINR(Math.round(value * 100))} />
@@ -129,11 +144,11 @@ export function DashboardPage() {
                 }))}
                 margin={{ top: 8, right: 8, bottom: 0, left: 8 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <CartesianGrid strokeDasharray="3 3" stroke={gridStroke} />
                 <XAxis dataKey="month" fontSize={12} />
                 <YAxis fontSize={12} tickFormatter={(value) => `₹${Math.round(Number(value) / 1000)}k`} />
                 <Tooltip formatter={(value: number) => formatINR(Math.round(value * 100))} />
-                <Line type="monotone" dataKey="Net" stroke="#2049db" strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="Net" stroke={lineStroke} strokeWidth={2} dot={false} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -142,7 +157,7 @@ export function DashboardPage() {
 
       <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card title="Awaiting action">
-          <ul className="divide-y divide-slate-100 text-sm">
+          <ul className="divide-y divide-slate-100 text-sm dark:divide-slate-800">
             <ActionRow label="Vouchers pending approval" count={data.pendingVouchers} to="/vouchers" />
             <ActionRow
               label="Requisitions awaiting approval"
@@ -159,12 +174,12 @@ export function DashboardPage() {
         </Card>
 
         <Card title="Recent activity">
-          <ul className="divide-y divide-slate-100">
+          <ul className="divide-y divide-slate-100 dark:divide-slate-800">
             {data.recentActivity.map((entry) => (
               <li key={entry.id} className="flex items-start justify-between gap-3 py-2 text-sm">
                 <div>
-                  <p className="text-slate-700">{entry.summary}</p>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-slate-700 dark:text-slate-300">{entry.summary}</p>
+                  <p className="text-xs text-slate-400 dark:text-slate-500">
                     {entry.username} · {formatDateTime(entry.ts)}
                   </p>
                 </div>
@@ -172,7 +187,7 @@ export function DashboardPage() {
               </li>
             ))}
             {data.recentActivity.length === 0 && (
-              <li className="py-2 text-sm text-slate-400">No activity yet.</li>
+              <li className="py-2 text-sm text-slate-400 dark:text-slate-500">No activity yet.</li>
             )}
           </ul>
         </Card>
@@ -184,9 +199,9 @@ export function DashboardPage() {
 function ActionRow({ label, count, to }: { label: string; count: number; to: string }) {
   return (
     <li className="flex items-center justify-between py-2">
-      <span className="text-slate-700">{label}</span>
+      <span className="text-slate-700 dark:text-slate-300">{label}</span>
       <span className="flex items-center gap-3">
-        <span className="font-semibold tabular-nums text-slate-900">{count}</span>
+        <span className="font-semibold tabular-nums text-slate-900 dark:text-slate-100">{count}</span>
         <Link className="link text-xs" to={to}>
           Open
         </Link>

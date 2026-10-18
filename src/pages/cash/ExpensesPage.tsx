@@ -198,7 +198,7 @@ export function ExpensesPage() {
             </Field>
           </div>
 
-          <label className="flex items-start gap-2 text-sm text-slate-700">
+          <label className="flex items-start gap-2 text-sm text-slate-700 dark:text-slate-300">
             <input
               type="checkbox"
               className="mt-0.5"
@@ -207,7 +207,7 @@ export function ExpensesPage() {
             />
             <span>
               Raise as a payment request (needs approval)
-              <span className="block text-xs text-slate-500">
+              <span className="block text-xs text-slate-500 dark:text-slate-400">
                 The expense is parked as PENDING and only posts to the ledger once a
                 different authorised user approves it.
               </span>
@@ -215,7 +215,7 @@ export function ExpensesPage() {
           </label>
 
           {tdsAmount > 0 && (
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Net cash outflow will be {((amount - tdsAmount) / 100).toFixed(2)} with TDS payable of{' '}
               {(tdsAmount / 100).toFixed(2)}.
             </p>

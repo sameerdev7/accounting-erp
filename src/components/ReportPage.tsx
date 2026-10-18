@@ -34,12 +34,12 @@ export function ReportPage({
     mode === 'none' ? undefined : (
       <div className="flex flex-wrap items-end gap-2">
         {mode === 'range' && (
-          <label className="text-xs text-slate-500">
+          <label className="text-xs text-slate-500 dark:text-slate-400">
             From
             <Input type="date" className="mt-1" value={from} onChange={(event) => setFrom(event.target.value)} />
           </label>
         )}
-        <label className="text-xs text-slate-500">
+        <label className="text-xs text-slate-500 dark:text-slate-400">
           {mode === 'asOn' ? 'As on' : 'To'}
           <Input type="date" className="mt-1" value={to} onChange={(event) => setTo(event.target.value)} />
         </label>
@@ -48,7 +48,7 @@ export function ReportPage({
 
   if (error) {
     return (
-      <div className="rounded-md border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+      <div className="rounded-md border border-red-200 dark:border-red-500/30 bg-red-50 dark:bg-red-500/10 p-4 text-sm text-red-700 dark:text-red-400">
         Could not run the report: {error}
       </div>
     )

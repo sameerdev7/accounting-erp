@@ -288,7 +288,7 @@ export function DeliveriesPage() {
         {selectedOrder && (
           <div className="mt-4">
             <div className="mb-2 flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-slate-700">Goods to despatch</h3>
+              <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Goods to despatch</h3>
               {orderLines.loading && <Spinner />}
             </div>
 
@@ -315,7 +315,7 @@ export function DeliveriesPage() {
             <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
                 <thead>
-                  <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
+                  <tr className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                     <th className="th">Item</th>
                     <th className="th w-28 text-right">Ordered</th>
                     <th className="th w-28 text-right">Delivered</th>
@@ -325,9 +325,9 @@ export function DeliveriesPage() {
                 </thead>
                 <tbody>
                   {drafts.map((draft) => (
-                    <tr key={draft.key} className="border-b border-slate-100">
+                    <tr key={draft.key} className="border-b border-slate-100 dark:border-slate-800">
                       <td className="px-2 py-2">{itemNames.get(draft.itemId) ?? draft.itemId}</td>
-                      <td className="px-2 py-2 text-right tabular-nums text-slate-500">
+                      <td className="px-2 py-2 text-right tabular-nums text-slate-500 dark:text-slate-400">
                         {formatQty(draft.orderedQty)}
                       </td>
                       <td className="px-2 py-2">
@@ -352,7 +352,7 @@ export function DeliveriesPage() {
                           }
                         />
                       </td>
-                      <td className="px-2 py-2 text-right tabular-nums text-slate-600">
+                      <td className="px-2 py-2 text-right tabular-nums text-slate-600 dark:text-slate-300">
                         {formatINR(Math.round(numberValue(draft.qty) * draft.rate))}
                       </td>
                     </tr>
@@ -395,17 +395,17 @@ export function DeliveriesPage() {
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               <div>
                 <p className="label">Date</p>
-                <p className="text-sm text-slate-700">{formatDate(detail.date)}</p>
+                <p className="text-sm text-slate-700 dark:text-slate-300">{formatDate(detail.date)}</p>
               </div>
               <div>
                 <p className="label">Customer</p>
-                <p className="text-sm text-slate-700">
+                <p className="text-sm text-slate-700 dark:text-slate-300">
                   {customerNames.get(detail.customerId) ?? detail.customerId}
                 </p>
               </div>
               <div>
                 <p className="label">Sales order</p>
-                <p className="text-sm text-slate-700">
+                <p className="text-sm text-slate-700 dark:text-slate-300">
                   {detail.soId ? (orderNumbers.get(detail.soId) ?? '—') : '—'}
                 </p>
               </div>
@@ -416,7 +416,7 @@ export function DeliveriesPage() {
             </div>
 
             <div className="mt-4">
-              <h3 className="mb-2 text-sm font-semibold text-slate-700">Despatched items</h3>
+              <h3 className="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Despatched items</h3>
               {detailLines.loading ? (
                 <Spinner />
               ) : (detailLines.data ?? []).length === 0 ? (
@@ -424,7 +424,7 @@ export function DeliveriesPage() {
               ) : (
                 <table className="min-w-full text-sm">
                   <thead>
-                    <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
+                    <tr className="text-left text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
                       <th className="th">Item</th>
                       <th className="th text-right">Qty</th>
                       <th className="th text-right">Rate</th>
@@ -434,7 +434,7 @@ export function DeliveriesPage() {
                   </thead>
                   <tbody>
                     {(detailLines.data ?? []).map((line) => (
-                      <tr key={line.id} className="border-b border-slate-100">
+                      <tr key={line.id} className="border-b border-slate-100 dark:border-slate-800">
                         <td className="px-2 py-2">{itemNames.get(line.itemId) ?? line.itemId}</td>
                         <td className="px-2 py-2 text-right tabular-nums">{formatQty(line.qty)}</td>
                         <td className="px-2 py-2 text-right tabular-nums">{formatINR(line.rate)}</td>

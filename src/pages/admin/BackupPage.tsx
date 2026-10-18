@@ -115,7 +115,7 @@ export function BackupPage() {
 
       <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card title="Export backup">
-          <p className="mb-3 text-sm text-slate-600">
+          <p className="mb-3 text-sm text-slate-600 dark:text-slate-300">
             Writes the full database — masters, documents, the ledger, the audit trail and
             settings — to a single JSON file you can keep off the machine.
           </p>
@@ -125,7 +125,7 @@ export function BackupPage() {
         </Card>
 
         <Card title="Import backup">
-          <p className="mb-3 text-sm text-slate-600">
+          <p className="mb-3 text-sm text-slate-600 dark:text-slate-300">
             Restoring replaces the entire database with the contents of the file. This cannot be
             undone.
           </p>
@@ -142,8 +142,8 @@ export function BackupPage() {
       </div>
 
       <div className="mt-4">
-        <Card title="Reset all data" className="border-red-200">
-          <p className="mb-3 text-sm text-slate-600">
+        <Card title="Reset all data" className="border-red-200 dark:border-red-500/30">
+          <p className="mb-3 text-sm text-slate-600 dark:text-slate-300">
             Rebuilds the seeded dataset from scratch. Every change you have made is discarded.
           </p>
           <Button variant="danger" onClick={() => setResetOpen(true)} disabled={task.running}>
@@ -166,14 +166,14 @@ export function BackupPage() {
           </>
         }
       >
-        <div className="space-y-2 text-sm text-slate-600">
+        <div className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
           {task.error && <Alert tone="error">{task.error}</Alert>}
           <p>
             This will erase the current database and load the backup
             {pendingImport?.exportedAt ? ` exported on ${formatDateTime(pendingImport.exportedAt)}` : ''}
             {pendingImport?.exportedBy ? ` by ${pendingImport.exportedBy}` : ''}.
           </p>
-          <p className="font-medium text-red-700">This action cannot be undone.</p>
+          <p className="font-medium text-red-700 dark:text-red-400">This action cannot be undone.</p>
         </div>
       </Modal>
 
@@ -191,13 +191,13 @@ export function BackupPage() {
           </>
         }
       >
-        <div className="space-y-2 text-sm text-slate-600">
+        <div className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
           {task.error && <Alert tone="error">{task.error}</Alert>}
           <p>
             All current masters, documents, ledger entries and audit history will be replaced by a
             fresh seeded dataset.
           </p>
-          <p className="font-medium text-red-700">This action cannot be undone.</p>
+          <p className="font-medium text-red-700 dark:text-red-400">This action cannot be undone.</p>
         </div>
       </Modal>
     </>

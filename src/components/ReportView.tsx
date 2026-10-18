@@ -13,15 +13,15 @@ function cellValue(row: ReportRow, key: string, money: boolean): string {
 function rowClass(row: ReportRow): string {
   switch (row.emphasis) {
     case 'heading':
-      return 'bg-slate-50 font-semibold text-slate-800'
+      return 'bg-slate-50 font-semibold text-slate-800 dark:bg-slate-800/60 dark:text-slate-100'
     case 'section':
-      return 'bg-slate-50/60 font-semibold text-slate-700'
+      return 'bg-slate-50/60 font-semibold text-slate-700 dark:bg-slate-800/40 dark:text-slate-200'
     case 'subtotal':
-      return 'border-t border-slate-200 font-semibold text-slate-800'
+      return 'border-t border-slate-200 font-semibold text-slate-800 dark:border-slate-700 dark:text-slate-100'
     case 'total':
-      return 'border-t-2 border-slate-300 bg-slate-50 font-bold text-slate-900'
+      return 'border-t-2 border-slate-300 bg-slate-50 font-bold text-slate-900 dark:border-slate-600 dark:bg-slate-800/60 dark:text-white'
     default:
-      return row.muted ? 'text-slate-400' : ''
+      return row.muted ? 'text-slate-400 dark:text-slate-500' : ''
   }
 }
 
@@ -44,8 +44,10 @@ export function ReportView({
     <div className="space-y-4">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-lg font-semibold text-slate-900">{report.title}</h1>
-          {report.subtitle && <p className="mt-0.5 text-sm text-slate-500">{report.subtitle}</p>}
+          <h1 className="text-lg font-semibold text-slate-900 dark:text-slate-100">{report.title}</h1>
+          {report.subtitle && (
+            <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">{report.subtitle}</p>
+          )}
         </div>
         <div className="no-print flex flex-wrap items-center gap-2">
           {actions}
@@ -79,7 +81,7 @@ export function ReportView({
           {report.warnings.map((warning) => (
             <div
               key={warning}
-              className="rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800"
+              className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-200"
             >
               {warning}
             </div>
@@ -93,7 +95,7 @@ export function ReportView({
         ) : (
           <div className="overflow-x-auto">
             <table className="min-w-full">
-              <thead className="bg-slate-50">
+              <thead className="bg-slate-50 dark:bg-slate-800/50">
                 <tr>
                   {report.columns.map((column) => (
                     <th
@@ -111,7 +113,7 @@ export function ReportView({
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {report.rows.map((row, index) => (
                   <tr key={row.id ?? index} className={rowClass(row)}>
                     {report.columns.map((column, columnIndex) => (
@@ -142,7 +144,7 @@ export function ReportView({
       </Card>
 
       {report.notes && report.notes.length > 0 && (
-        <div className="space-y-1 text-xs text-slate-500">
+        <div className="space-y-1 text-xs text-slate-500 dark:text-slate-400">
           {report.notes.map((note) => (
             <p key={note}>{note}</p>
           ))}

@@ -76,7 +76,7 @@ export function VouchersPage() {
       />
 
       <Card bodyClassName="p-0">
-        <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 p-3">
+        <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 dark:border-slate-800 p-3">
           <Field label="Status">
             <Select
               className="w-40"
@@ -122,15 +122,15 @@ export function VouchersPage() {
             title={`${VOUCHER_TYPE_LABELS[selected.type]} ${selected.number}`}
             actions={
               <>
-                <span className="text-sm font-semibold tabular-nums text-slate-900">
+                <span className="text-sm font-semibold tabular-nums text-slate-900 dark:text-slate-100">
                   {formatINR(selected.amount)}
                 </span>
                 <StatusBadge status={selected.status} />
               </>
             }
           >
-            <p className="text-sm text-slate-700">{selected.narration}</p>
-            <p className="mt-1 text-xs text-slate-400">
+            <p className="text-sm text-slate-700 dark:text-slate-300">{selected.narration}</p>
+            <p className="mt-1 text-xs text-slate-400 dark:text-slate-500">
               Dated {formatDate(selected.date)}
               {partyName ? ` · Party: ${partyName}` : ''}
             </p>
