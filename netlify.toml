@@ -1,0 +1,28 @@
+# Netlify build configuration for the Accounting ERP single-page app.
+# The app is entirely client-side: `npm run build` emits a static bundle in `dist/`
+# and no server or database is required.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Hash-based routing means deep links already work, but this catch-all keeps every
+# path pointing at the app shell so a refresh on any URL still loads the SPA.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Long-cache the fingerprinted assets; never cache the HTML entry point.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
